@@ -1,4 +1,4 @@
-# Docs
+# felys-lang.github.io
 
 Felys documentation and guide built with mdBook.
 
