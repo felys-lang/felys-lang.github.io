@@ -1,0 +1,8 @@
+[book]
+authors = ["FelysNeko"]
+language = "en"
+src = "src"
+title = "Felys"
+
+[output.html]
+git-repository-url = "https://github.com/felys-lang/felys"
