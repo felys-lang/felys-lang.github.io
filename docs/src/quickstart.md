@@ -123,7 +123,7 @@ matrix = <2, 3>;
 
 The runtime can get the correct value when evaluating this, instead of initializing it again. For unmodified programs, you can optionally load previous parameters. If you are using the playground, this can be achieved by clicking the lock icon.
 
-Once you matrix you want to back propagate, you can call:
+Once you want to back propagate, you can call:
 
 ```
 step loss by 0.01;

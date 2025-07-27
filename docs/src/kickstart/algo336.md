@@ -126,4 +126,4 @@ Unlike standard transition table represented in matrix, our version takes range 
 
 ## Next Step
 
-Finite automata is a well-studied topic in computer science, and I have only covered the tip of the iceberg. If you're interested, please refer to the Dragon Book. It contains an entire section on lexical analysis techniques, presented in a highly academic languages.
+Finite automata is a well-studied topic in computer science, and I have only covered the tip of the iceberg. If you're interested, please refer to the Dragon Book. It contains an entire section on lexical analysis techniques, presented in highly academic languages.
