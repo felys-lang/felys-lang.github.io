@@ -1,6 +1,6 @@
 # Grammar File
 
-Felys grammar file uses customized [syntax](../kickstart/syntax.md) to generate the parser and lexer. However, due to limitations of the parser generator, the non-terminals `ident` and `eof` are still written by hand. Their implementations can be found in the source code.
+Felys grammar file uses customized [syntax](../principle/syntax.md) to generate the parser and lexer. However, due to limitations of the parser generator, the non-terminals `ident` and `eof` are still written by hand. Their implementations can be found in the source code.
 
 ```
 {
@@ -157,7 +157,10 @@ peg lit -> { Lit }:
     / bool=BOOL { Lit::Bool(bool) }
     ;
 
-lex FLOAT -> { Float }: float=F64 { Float(float) } ;
+lex FLOAT -> { Float }:
+    / float=UFX { Float::Positive(float) }
+    / '-' float=UFX { Float::Negative(float) }
+    ;
 
 lex INT -> { Int }: int=USIZE { Int(int) } ;
 
@@ -198,7 +201,7 @@ TAIL: [a-zA-Z0-9_] ;
 
 @(intern) {
     USIZE: '0' | [1-9][0-9]* ;
-    F64: [1-9][0-9]* '.' [0-9]+ | '0.' [0-9]+;
+    UFX: [1-9][0-9]* '.' [0-9]+ | '0.' [0-9]+;
     SLICE: [^"\\]+ ;
     HEX: [0-9a-f]* ;
     ESCAPE: ['ntr\\] ;
