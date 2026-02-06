@@ -1,21 +1,20 @@
 # Everything About Felys
 
-Felys is a dynamically strongly typed scripting language with a syntax similar to Rust. It provides minimal features to support data grouping with dynamic length, i.e., tuples and lists. The entire project is intended to be a toy language for demonstration purposes only. I have never considered turning this into a real product; instead, it serves as a tribute to [Elysia](https://www.youtube.com/watch?v=RUe2BDz6RO4) from Honkai Impact 3rd.
+Felys is a dependency-free interpreted programming language written in Rust, featuring its own compiler and runtime. Feel free to try it out in the online [playground](https://exec.felys.dev). Please note, however, that the language is currently in a fragile state following a major reconstruction and requires project-level refactoring to improve code quality.
 
-Feel to try Felys using the online [playground](https://exec.felys.dev).
+## Announcement
 
-## Topics
+Unfortunately, nothing left here. There used to be some blogs discussing some algorithms and implementation in project. However, after introducing the entire compilation framework, most of them are dated, so I removed them. At the same time, I have lost the momentum of writing new stuff. In fact, I am about to archive this project. Why?
 
-In short, there are three main topics that worth sharing:
+- If I really want to get into the compiler industry, no one cares if I can build a toy language. People value contributions to those real projects. At the same time, learning through this project is getting less efficient compared to working on a real project. At the point of making this decision, I am already half way through my undergraduate degree. I don't have time.
+- This project is for resolving my mental issue. I know it sounds weird, but it works. As my mental health slowly getting back to a normal state, this project lost its value from this perspective. Good news is that the project is done with all designed features implemented and worked. If you are curious about the story behind it, please read [病者的粉色遐想♪](autobiography.md). Sorry, it's in Chinese. My English level is good enough for technical stuff, but literature. Feel free to translate to at least get the main idea though.
 
-- Design principle that covers all the considerations involved in designing Felys.
-- Implementation of a [PEG](https://en.wikipedia.org/wiki/Parsing_expression_grammar)/[Packrat](https://en.wikipedia.org/wiki/Packrat_parser) parser along with a [DFA](https://en.wikipedia.org/wiki/Deterministic_finite_automaton)-driven lexer.
-- Neural network framework with automatic differentiation and dynamic computation graph.
+Please remember, Felys is a programming language because of Elysia and Cyrene.
 
-Some of these are a bit academic, but I believe this book should be accessible to most EE/CS undergraduates beyond their first year.
+## Copyright
 
-> Most of these are not done yet. Writing takes time.
+© All rights reserved by miHoYo
 
 ## Legal Statement
 
-Other properties and any right, title, and interest thereof and therein (intellectual property rights included) not derived from Honkai Impact 3rd belong to their respective owners.
+Other properties and any right, title, and interest thereof and therein (intellectual property rights included) not derived from Honkai Impact 3rd and Honkai: Star Rail belong to their respective owners.
