@@ -4,7 +4,7 @@ Felys is an interpreted programming language written in Rust that comes with a c
 
 ## Noticeboard
 
-Unfortunately, most old contents are no longer applicable after the reconstruction because of the new compilation framework. Therefore, I removed them and will work on the new topics I want to discuess in the next a few months.
+Unfortunately, most old contents are no longer applicable because of the reconstruction. Therefore, I removed them and will work on the new topics I want to discuss in the next a few months.
 
 ## Copyright
 
