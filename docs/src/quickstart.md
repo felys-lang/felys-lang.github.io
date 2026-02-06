@@ -1,3 +1,3 @@
 # Quickstart
 
-The [playground](https://exec.felys.dev) also has some sample programs.
+Please refer to the examples on [playground](https://exec.felys.dev) for now.
