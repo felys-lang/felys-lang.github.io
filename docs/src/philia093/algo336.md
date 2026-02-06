@@ -1,6 +1,6 @@
 # Algorithm 3.36
 
-Finite automata come in two types: deterministic (DFA) and non-deterministic (NFA). While DFAs are generally faster, NFAs allow more flexible transitions and is more extensive. However, our main parsing strategy is based on PEG, which supports infinite backtracking. Since the lexer only needs to recognize simple lexemes and efficiency is important, DFAs are preferred for lexical analysis. Algorithm 3.36 introduced by the Dragon Book can be used to construct DFAs directly.
+Finite automata come in two types: deterministic (DFA) and non-deterministic (NFA). While DFAs are generally faster, NFAs allow more flexible transitions and is more extensive. However, our main parsing strategy is based on PEG, which already supports infinite backtracking. Therefore, the lexer only needs to recognize simple lexemes and efficiency matters, so DFAs are preferred for lexical analysis. Algorithm 3.36 introduced by the Dragon Book can be used to construct DFAs directly.
 
 ## Introduction to Language
 
@@ -13,9 +13,9 @@ This is a highly academic topic and too lengthy for this book, so I will briefly
 
 **Note**: All these are still languages, so that induction works.
 
-## Preparator
+## Prerequisite
 
-Before generating them, we need to compute `followpos` using `nullable`, `firstpos`, and `lastpos`. To make this table look nicer, I will remove all `pos` postfixes. Note that parenthesis is not mentioned, because it only change precedence, so we can just recursively call into it.
+Before generating them, we need to compute `followpos` using `nullable`, `firstpos`, and `lastpos`. To make this table look nicer, I will omit all `pos` postfixes. Note that parenthesis is not mentioned, because it only change precedence, so we can just recursively call into it.
 
 | Node: `n`       | `nullable(n)`                    | `first(n)`                                              | `last(n)`                                            |
 | --------------- | -------------------------------- | ------------------------------------------------------- | ---------------------------------------------------- |
@@ -29,9 +29,9 @@ Once we have these formulae, we can compute `followpos`, which can be represente
 1. Concat(`c1c2`): all positions in `first(c2)` are in `follow(i)` for `i` in `last(c1)`
 2. Kleene(`c*`): all positions in `first(c)` are in `follow(i)` for `i` in `last(c)`
 
-If your use case involves constructing very large transition table, it would be helpful to cache all the results of `nullable`, `firstpos`, and `lastpos`. For Felys, the transition table are usually small, so there is no need to bring extra overhead.
+If your use case involves constructing very large transition table, it would be helpful to cache all the results of `nullable`, `firstpos`, and `lastpos`. For Felys, the transition tables are usually small, so there is no need to bring extra overhead.
 
-## Construction
+## Transition Table Construction
 
 Here are the syntax tree nodes:
 
@@ -50,7 +50,7 @@ enum Position {
 }
 ```
 
-This is pretty straight forward, but I do want clarify two designs here. The `usize` in `Language::Position` is its label or `i` mentioned in the table. Every position must have a unique `i`. Secondly, instead of a single character, we want to use `Position::Set` that represent all characters that acceptable for this position. This is a necessary modification to make this algorithm practical, because we can treat a range of characters as a whole. For instances (pseudocode only):
+This is pretty straight forward, but I do want clarify two designs here. The `usize` in `Language::Position` is its label or `i` mentioned in the table. Every position must have a unique `i`. Secondly, instead of a single character, we want to use `Position::Set` that represent all acceptable characters for this position. This is a necessary modification to make this algorithm practical, because we can treat a range of characters as a whole. For instances (pseudocode only):
 
 - single character `'0'` is equivalent to `[('0', '0')]`
 - inclusive set `[0-9]` is equivalent to `[('0', '9')]`
@@ -58,9 +58,7 @@ This is pretty straight forward, but I do want clarify two designs here. The `us
 
 ### Core Algorithm
 
-Before building everything, we need to append a special pound symbol at the end of the language to identify the terminal state. It's recommended to do this at the syntax tree level rather than directly appending it to the regular expression.
-
-Once the syntax tree is built and the pound is appended, we can compute the `followpos` graph, and also collect all the position indices.
+Before building the transition table, we need to append a special pound symbol at the end to identify the terminal state. It's recommended to do this at the syntax tree level rather than directly appending it to the regular expression. Once the syntax tree is built and the pound is appended, we can compute the `followpos` graph, and also collect all the position indices.
 
 Then we can use apply the following algorithm (the original pseudocode):
 
@@ -122,8 +120,8 @@ Then we can safely iterate through `ranges` instead of all unicode characters.
 
 ### Representation
 
-Unlike standard transition table represented in matrix, our version takes range and transfer into another state. There are many ways to do it, but for Rust we can use a `match` expression with multiple `(start..=end) => state` ended with a `_ => break` inside a loop. Once the loop breaks, we can check the acceptance of the state.
+Unlike standard transition table represented in matrix, our version takes range and transfer into another state. There are many ways to do it, but for Rust we can use a `match` expression with multiple `(state, start..=end) => state` ended with a `_ => break` inside a loop. Once the loop breaks, we can check for the acceptance of the state.
 
-## Next Step
+## More Information
 
 Finite automata is a well-studied topic in computer science, and I have only covered the tip of the iceberg. If you're interested, please refer to the Dragon Book. It contains an entire section on lexical analysis techniques, presented in highly academic languages.
