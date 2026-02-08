@@ -4,7 +4,7 @@ Felys documentation and guide built with mdBook.
 
 ## License
 
-Distributed under the terms of the [MIT License](LICENSE).
+Distributed under the terms of the [LICENSE](LICENSE).
 
 ## Legal Statement
 
